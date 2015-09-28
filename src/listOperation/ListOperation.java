@@ -1,7 +1,7 @@
 package listOperation;
 
 import java.util.LinkedList;
-import java.util.Scanner;
+
 
 /**
  * Created by SAI on 6/27/2015. for InformationRetrival
@@ -20,7 +20,7 @@ public class ListOperation {
             } else if (list1.get(i) < list2.get(j)) {
                 checkOrAndAddElement(list1, operation, resList, i);
                 i++;
-            } else if (list1.get(i) > list2.get(j)) {//list 2 element is greater than list one element
+            } else if (list1.get(i) > list2.get(j)) {//list 2 element is lesser than list one element
                 checkOrAndAddElement(list2, operation, resList, j);
                 j++;
             }
