@@ -137,7 +137,12 @@ public class EvalvationWithFile {
         }
 
         performUnbracketedExpression(operand,operator);
-        return operand.pop();
+        if(operand.size() == 1) {
+            return operand.pop();
+        }else {
+            System.out.println("Oops Invalid expression");
+            return null;
+        }
     }
     /*
      for ip a&b
@@ -156,18 +161,21 @@ public class EvalvationWithFile {
     private void computeAndOrNot( Stack<LinkedList<Integer>> operand, String op) {
         String and = "&",or = "|",not = "!";
 
+        try {
+            if (op.equals(and)) {
 
-        if (op.equals(and)){
+                operand.push(ListOperation.andOrOpearation(operand.pop(), operand.pop(), and));
 
-            operand.push(ListOperation.andOrOpearation(operand.pop(),operand.pop(), and) );
+            } else if (op.equals(or)) {
+                System.out.println("or");
+                operand.push(ListOperation.andOrOpearation(operand.pop(), operand.pop(), or));
 
-        }else if(op.equals(or)){
-            System.out.println("or");
-            operand.push(ListOperation.andOrOpearation(operand.pop() ,operand.pop(),or) );
+            } else if (op.equals(not)) {
 
-        }else if(op.equals(not)){
-
-            operand.push(ListOperation.notList(operand.pop(),noOfDocuments));
+                operand.push(ListOperation.notList(operand.pop(), noOfDocuments));
+            }
+        }catch (Exception e){
+            System.out.println("Invalid Expression missing operands");
         }
     }
 
@@ -183,7 +191,10 @@ public class EvalvationWithFile {
             if (validateParanthesis(ip)) {
                 tokens = convertExpressionToStringArray(ip);
                 if (validateTokens(tokens)) {
-                    System.out.println("The Reultant list is"+evalvateExpression(tokens));
+                    LinkedList<Integer> ans = evalvateExpression(tokens);
+                    if(ans != null) {
+                        System.out.println("The Reultant list is" + evalvateExpression(tokens));
+                    }
                 }
 
             }
